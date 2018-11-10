@@ -3,18 +3,18 @@
 # @Time    : 2018/11/9 11:21
 # @Author  : qkwu
 # @File    : leetcode55JumpGame.py
-import math
+
 class Solution:
     def canJump(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
-        reach = 0
-        for i in range(len(nums)-1):
-            if i <= reach:
-                reach = max(reach, i+nums[i])
-        return reach >= len(nums)-1
+        i_left = len(nums) - 1
+        for i in range(len(nums) - 2, -1, -1):  # go backward
+            if i + nums[i] >= i_left:  # if maximum jump is far enough
+                i_left = i
+        return i_left == 0
 
 
 nums = [2,3,1,1,4]
