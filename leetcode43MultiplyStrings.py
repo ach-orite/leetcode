@@ -15,7 +15,7 @@ class Solution:
         for i in range(len(num1)):
             for j in range(len(num2)):
                 ans += ((ord(num1[-i - 1]) - ord('0')) * 10 ** i) * ((ord(num2[-j - 1]) - ord('0')) * 10 ** j)
-        return str(ans) 
+        return str(ans)
 
 num1 = "123"
 num2 = "456"
