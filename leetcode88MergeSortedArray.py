@@ -13,25 +13,31 @@ class Solution:
         :type n: int
         :rtype: void Do not return anything, modify nums1 in-place instead.
         """
-        for _ in range(m + n):
+        if not nums1 or not nums2:
+            nums1 = nums1 + nums2
+        else:
             cur = 0
-            idx1 = 0
-            idx2 = 0
-            if nums1[idx1] <= nums2[idx2]:
-                idx1 += 1
-                cur += 1
-            else:
-                nums1[cur:] = nums2[idx2]+nums1[cur+1:-1]
-                idx2 += 1
-                cur += 1
+            p1 = 0
+            p2 = 0
+            while cur < m and p2 < n:
+                if nums1[p1] <= nums2[p2]:
+                    cur += 1
+                    p1 += 1
+                else:
+                    p1 += 1
+                    nums1[p1:] = nums1[p1-1:-1]
+                    nums1[p1-1] = nums2[p2]
+                    p2 += 1
+            if p2 < n:
+                nums1[-(n-p2):] = nums2[p2:]
 
-        return nums1
 
 
-nums1 = [1,2,3,0,0,0]
-m = 3
-nums2 = [2,5,6]
-n = 3
+nums1 = [4,0,0,0,0,0]
+m = 1
+nums2 = [1,2,3,5, 6]
+n = 5
 
 sl = Solution()
 print(sl.merge(nums1, m, nums2, n))
+print(nums1)
