@@ -1,42 +1,41 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2018/11/15 16:39
+# @Time    : 2018/11/29 15:46
 # @Author  : qkwu
-# @File    : leetcode78Subsets.py
+# @File    : leetcode90SubSetII.py
 
 class Solution:
-    def subsets(self, nums):
+    def subsetsWithDup(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        res = []
+        nums.sort()
+        res = set()
         self.dfs(nums, res, [])
-        return res
+        realres = []
+        for tup in res:
+            realres.append(list(tup))
+        return realres
 
     def dfs(self, nums, res, temp):
         if not nums:
-            res.append(temp)
+            res.add(tuple(temp))
         else:
             self.dfs(nums[1:], res, temp[:])
             temp.append(nums[0])
             self.dfs(nums[1:], res, temp[:])
 
 
-
-
-nums = [1,2,3]
-# Output:
-# [
-#   [3],
-#   [1],
-#   [2],
-#   [1,2,3],
-#   [1,3],
-#   [2,3],
-#   [1,2],
-#   []
-# ]
+nums = [1,2,2]
+Output = [
+  [2],
+  [1],
+  [1,2,2],
+  [2,2],
+  [1,2],
+  []
+]
 
 sl = Solution()
-print(sl.subsets(nums))
+print(sl.subsetsWithDup(nums))
